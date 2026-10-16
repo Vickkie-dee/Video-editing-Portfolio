@@ -275,9 +275,11 @@
   .nav-links a[aria-current="page"] { color: var(--fg); }
 
   /* Portfolio showcase on the home page: live player left, two big doors right */
-  .showcase { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 20px; align-items: stretch; }
+  .showcase { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 32px; align-items: stretch; }
+  .pl-wrap { position: relative; min-width: 0; }
+  .pl-wrap::before { content: ""; display: block; padding-top: 56.25%; }
   .showcase > * { min-width: 0; }
-  .player { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #05070a; border: 1px solid var(--line); color: var(--on-media); isolation: isolate; }
+  .player { position: absolute; inset: 0; border-radius: 14px; overflow: hidden; background: #05070a; border: 1px solid var(--line); color: var(--on-media); isolation: isolate; }
   .pl-bg, .pl-fg, .pl-video { position: absolute; inset: 0; width: 100%; height: 100%; }
   .pl-bg { object-fit: cover; filter: blur(22px) brightness(0.55) saturate(1.2); transform: scale(1.15); z-index: 0; }
   .pl-fg { object-fit: contain; z-index: 1; }
@@ -302,8 +304,8 @@
   .pl-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; z-index: 6; background: rgba(255,255,255,0.18); }
   .pl-bar i { display: block; height: 100%; width: 0; background: #FFB547; }
 
-  .picks { display: grid; grid-template-rows: 1fr 1fr; gap: 20px; }
-  .pick { position: relative; display: flex; align-items: flex-end; min-height: 150px; padding: clamp(18px, 2.4vw, 26px); border-radius: 14px; overflow: hidden; text-decoration: none; color: var(--fg); background: var(--surface); border: 1px solid var(--line); isolation: isolate; transition: border-color 0.2s ease, transform 0.2s ease; }
+  .picks { display: grid; grid-template-rows: 1fr 1fr; gap: 20px; min-width: 0; }
+  .pick { position: relative; display: flex; align-items: flex-end; min-height: 0; padding: clamp(18px, 2.2vw, 24px); border-radius: 14px; overflow: hidden; text-decoration: none; color: var(--fg); background: var(--surface); border: 1px solid var(--line); isolation: isolate; transition: border-color 0.2s ease, transform 0.2s ease; }
   .pick:hover { border-color: var(--c); transform: translateY(-2px); }
   .pick-thumbs { position: absolute; top: 0; right: 0; bottom: 0; width: 36%; z-index: -1; display: flex; gap: 6px; padding: 10px 10px 10px 0; justify-content: flex-end; }
   .pick-thumbs img { height: 100%; width: auto; max-width: 50%; object-fit: cover; border-radius: 8px; opacity: 0.8; transition: opacity 0.2s ease; }
@@ -316,8 +318,8 @@
   .pick-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.95rem; }
   .pick-cta svg { transition: transform 0.2s ease; }
   .pick:hover .pick-cta svg { transform: translateX(4px); }
-  @media (max-width: 900px) {
-    .showcase { grid-template-columns: minmax(0, 1fr); }
+  @media (max-width: 1000px) {
+    .showcase { grid-template-columns: minmax(0, 1fr); gap: 20px; }
     .picks { grid-template-rows: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .pick { flex-direction: column; align-items: stretch; padding: 0; min-height: 0; }
     .pick-thumbs { position: static; width: 100%; height: 120px; z-index: auto; padding: 12px 12px 0 16px; justify-content: flex-start; }
@@ -337,9 +339,22 @@
   .page-head .lede { margin-top: 16px; }
   .switch { margin-top: 18px; }
   .switch a { color: var(--fg); text-underline-offset: 4px; }
-  .page-filters { margin-top: 30px; }
   .page-body { padding-block: 28px clamp(52px, 8vw, 96px); }
   .count { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
   .cta-block { border-top: 1px solid var(--line); padding-block: clamp(44px, 7vw, 80px); }
   .cta-block .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; }
   .cta-block h2 { margin-top: 10px; }
+
+  /* Search bar on the portfolio pages */
+  .search { position: relative; margin-top: 30px; }
+  .search-label { display: block; margin-bottom: 10px; font-size: 0.95rem; color: var(--muted); }
+  .search-ic { position: absolute; left: 20px; top: 50%; margin-top: 2px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+  .search-field { position: relative; }
+  .search input { width: 100%; height: 58px; padding: 0 56px 0 54px; font: 400 1rem var(--font-body); color: var(--fg); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 999px; }
+  .search input::placeholder { color: var(--muted); opacity: 0.9; }
+  .search input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+  .search input::-webkit-search-cancel-button { display: none; }
+  .search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--surface-2); color: var(--fg); cursor: pointer; display: grid; place-items: center; }
+  .search-clear:hover { background: var(--line-strong); }
+  .page-filters { margin-top: 18px; }
+  .empty a { color: var(--fg); }
