@@ -568,8 +568,9 @@
     var a = document.getElementById('hv-video'), btn = document.getElementById('hv-toggle');
     if (!a || !btn) return;
     var slides = [
-      { src: 'assets/clips/lexus-lc-showcase.mp4', pos: '50% 72%', portrait: false },
-      { src: 'assets/clips/hero-talking-head.mp4', pos: '', portrait: true }
+      { src: 'assets/clips/lexus-lc-showcase.mp4', pos: '50% 72%', portrait: false, bg: '' },
+      { src: 'assets/clips/hero-talking-head.mp4', pos: '', portrait: true, bg: 'assets/thumbs/17-bg.jpg' },
+      { src: 'assets/clips/hero-explainer.mp4', pos: '', portrait: true, bg: 'assets/thumbs/18.jpg' }
     ];
     var bgimg = document.getElementById('hv-bgimg');
     var b = document.createElement('video');
@@ -601,7 +602,11 @@
       to.currentTime = 0;
       to.style.zIndex = '-2'; from.style.zIndex = '-3';
       to.classList.add('on');
-      if (bgimg) bgimg.classList.toggle('show', !!slides[(si + 1) % slides.length].portrait);
+      var ns = slides[(si + 1) % slides.length];
+      if (bgimg) {
+        if (ns.portrait) { if (ns.bg && bgimg.getAttribute('src') !== ns.bg) bgimg.src = ns.bg; bgimg.classList.add('show'); }
+        else bgimg.classList.remove('show');
+      }
       if (!userPaused && visible) playEl(to);
       cur = 1 - cur; si = (si + 1) % slides.length;
       setTimeout(function () { from.classList.remove('on'); from.pause(); switching = false; prep(); icons(); }, 700);
