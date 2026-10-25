@@ -358,3 +358,21 @@
   .search-clear:hover { background: var(--line-strong); }
   .page-filters { margin-top: 18px; }
   .empty a { color: var(--fg); }
+
+  /* Hero with a background video and the text laid over it */
+  .hero-v { position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: center; min-height: min(90vh, 880px); color: #fff;
+    --fg: #FFFFFF; --muted: rgba(255,255,255,0.82); --surface: rgba(8,10,14,0.55); --surface-2: rgba(255,255,255,0.1);
+    --line: rgba(255,255,255,0.18); --line-strong: rgba(255,255,255,0.36); --accent: #FFB547; --on-accent: #1A1200;
+    --c-video: #3CC2B0; --c-ai: #A394FF; --ok: #5FD08A; border-bottom: 1px solid var(--line); }
+  .hero-v .hv-content { position: relative; }
+  .hv-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 72%; z-index: -2; background: #0b0d11; }
+  .hv-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.6) 42%, rgba(0,0,0,0.18) 100%); }
+  .hero-v .tl { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .hero-v .btn-ghost { background: rgba(0,0,0,0.25); }
+  .hv-toggle { position: absolute; right: clamp(12px, 3vw, 28px); top: 14px; z-index: 3; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.45); color: #fff; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .hv-toggle:hover { border-color: #FFB547; }
+  @media (max-width: 720px) {
+    .hero-v { min-height: 0; padding-top: 64px; }
+    .hv-shade { background: linear-gradient(180deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.62) 50%, rgba(0,0,0,0.8) 100%); }
+    .hv-video { object-position: 50% 60%; }
+  }
