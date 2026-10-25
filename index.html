@@ -29,7 +29,8 @@
 
 <main id="top">
   <section class="hero hero-v">
-    <video class="hv-video" id="hv-video" autoplay muted loop playsinline preload="auto" poster="assets/thumbs/16-hero.jpg" aria-hidden="true" tabindex="-1">
+    <img class="hv-bgimg" id="hv-bgimg" src="assets/thumbs/17-bg.jpg" alt="" aria-hidden="true">
+    <video class="hv-video on" id="hv-video" autoplay muted loop playsinline preload="auto" poster="assets/thumbs/16-hero.jpg" aria-hidden="true" tabindex="-1">
       <source src="assets/clips/lexus-lc-showcase.mp4" type="video/mp4">
     </video>
     <div class="hv-shade" aria-hidden="true"></div>
@@ -551,25 +552,67 @@
     go(0);
   })();
 
-  /* Hero background video: loops muted; paused when off screen, with a pause button and for reduced motion */
+  /* Hero background: plays the video clips one after another with a crossfade (the Lexus full screen, then a short
+     talking-head part shown upright on wide screens), muted. Pauses when off screen, has a pause button,
+     and does not autoplay for reduced motion. */
   (function () {
-    var v = document.getElementById('hv-video'), btn = document.getElementById('hv-toggle');
-    if (!v || !btn) return;
-    var userPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches, visible = true;
+    var a = document.getElementById('hv-video'), btn = document.getElementById('hv-toggle');
+    if (!a || !btn) return;
+    var slides = [
+      { src: 'assets/clips/lexus-lc-showcase.mp4', pos: '50% 72%', portrait: false },
+      { src: 'assets/clips/hero-talking-head.mp4', pos: '', portrait: true }
+    ];
+    var bgimg = document.getElementById('hv-bgimg');
+    var b = document.createElement('video');
+    b.className = 'hv-video'; b.muted = true; b.preload = 'auto';
+    b.setAttribute('playsinline', ''); b.setAttribute('aria-hidden', 'true'); b.tabIndex = -1;
+    a.parentNode.insertBefore(b, a.nextSibling);
+    a.removeAttribute('loop');
+    var els = [a, b], cur = 0, si = 0, switching = false, visible = true;
+    var userPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    a.style.objectPosition = slides[0].pos;
     function icons() {
-      var paused = v.paused;
+      var paused = els[cur].paused;
       document.getElementById('hv-pause-ic').hidden = paused;
       document.getElementById('hv-play-ic').hidden = !paused;
       btn.setAttribute('aria-label', paused ? 'Play background video' : 'Pause background video');
     }
-    function want() { if (userPaused || !visible || document.hidden) v.pause(); else { var p = v.play(); if (p && p.catch) p.catch(function () {}); } }
+    function prep() {
+      var nxt = els[1 - cur], ns = (si + 1) % slides.length;
+      nxt.style.objectPosition = slides[ns].pos;
+      nxt.classList.toggle('portrait', slides[ns].portrait);
+      if (nxt.getAttribute('data-s') !== String(ns)) { nxt.src = slides[ns].src; nxt.setAttribute('data-s', String(ns)); nxt.load(); }
+    }
+    function playEl(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    function swap() {
+      if (switching) return;
+      var from = els[cur], to = els[1 - cur];
+      if (to.readyState < 3) { from.currentTime = 0; if (!userPaused && visible) playEl(from); return; }
+      switching = true;
+      to.currentTime = 0;
+      to.style.zIndex = '-2'; from.style.zIndex = '-3';
+      to.classList.add('on');
+      if (bgimg) bgimg.classList.toggle('show', !!slides[(si + 1) % slides.length].portrait);
+      if (!userPaused && visible) playEl(to);
+      cur = 1 - cur; si = (si + 1) % slides.length;
+      setTimeout(function () { from.classList.remove('on'); from.pause(); switching = false; prep(); icons(); }, 700);
+    }
+    els.forEach(function (v) {
+      v.addEventListener('timeupdate', function () { if (v === els[cur] && v.duration && v.duration - v.currentTime < 0.5) swap(); });
+      v.addEventListener('ended', function () { if (v === els[cur]) swap(); });
+      v.addEventListener('play', icons); v.addEventListener('pause', icons);
+    });
+    a.addEventListener('playing', function once() { a.removeEventListener('playing', once); a.removeAttribute('autoplay'); prep(); });
+    function want() {
+      var v = els[cur];
+      if (userPaused || !visible || document.hidden) v.pause(); else playEl(v);
+    }
     btn.addEventListener('click', function () { userPaused = !userPaused; want(); });
-    v.addEventListener('play', icons); v.addEventListener('pause', icons);
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; want(); }, { threshold: 0.05 }).observe(document.getElementById('hero-box') || v.parentNode);
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; want(); }, { threshold: 0.05 }).observe(a.parentNode);
     }
     document.addEventListener('visibilitychange', want);
-    if (userPaused) { v.removeAttribute('autoplay'); v.pause(); }
+    if (userPaused) { a.removeAttribute('autoplay'); a.pause(); }
     icons();
   })();
 
