@@ -305,8 +305,7 @@
         v.src = clip;
         v.setAttribute('aria-label', title.textContent);
         stage.appendChild(v);
-        if (m) { note.textContent = 'This is a short preview of the full video.'; link.href = href; link.textContent = 'Watch the full video on Google Drive ↗'; link.hidden = false; }
-        else { note.textContent = ''; link.hidden = true; }
+        note.textContent = ''; link.hidden = true;
       } else {
         var f = document.createElement('iframe');
         f.src = 'https://drive.google.com/file/d/' + m[1] + '/preview';

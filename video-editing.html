@@ -140,15 +140,15 @@
             <span class="kind"><i></i>Video editing</span>
           </div>
         </article>
-        <article class="card" data-cat="long" data-q="boron for crops: long-form explainer a four-minute long-form edit with hindi captions, product shots and farm footage about how boron helps crops. watch the full video on google drive. video editing 16:9 long form" data-clip="assets/clips/long-form-preview.mp4" style="--c: var(--c-video)">
+        <article class="card" data-cat="long" data-q="boron for crops: long-form explainer a four-minute long-form edit with hindi captions, product shots and farm footage about how boron helps crops. plays with sound. video editing 16:9 long form" data-clip="assets/clips/long-form-preview.mp4" style="--c: var(--c-video)">
           <div class="thumb">
             <span class="tag tl-corner">16:9</span>
             <div class="frame has-img" style="--ar: 16 / 9"><img src="assets/thumbs/05.jpg" alt="Yellow tomato flowers on a plant in a field" width="640" height="364" loading="lazy"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg></div>
             <span class="tag br-corner">Watch</span>
           </div>
           <div class="card-body">
-            <h3><a href="https://drive.google.com/file/d/1cHWvaqAK5iTS3dxdOeOH8F_Hf9jbOWlw/view?usp=sharing" target="_blank" rel="noopener">Boron for Crops: Long-Form Explainer</a></h3>
-            <p>A four-minute long-form edit with Hindi captions, product shots and farm footage about how boron helps crops. Watch the full video on Google Drive.</p>
+            <h3><a href="assets/clips/long-form-preview.mp4" target="_blank" rel="noopener">Boron for Crops: Long-Form Explainer</a></h3>
+            <p>A four-minute long-form edit with Hindi captions, product shots and farm footage about how boron helps crops. Plays with sound.</p>
             <span class="kind"><i></i>Video editing</span>
           </div>
         </article>
@@ -378,8 +378,7 @@
         v.src = clip;
         v.setAttribute('aria-label', title.textContent);
         stage.appendChild(v);
-        if (m) { note.textContent = 'This is a short preview of the full video.'; link.href = href; link.textContent = 'Watch the full video on Google Drive ↗'; link.hidden = false; }
-        else { note.textContent = ''; link.hidden = true; }
+        note.textContent = ''; link.hidden = true;
       } else {
         var f = document.createElement('iframe');
         f.src = 'https://drive.google.com/file/d/' + m[1] + '/preview';
