@@ -400,3 +400,33 @@
   .vm-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; padding: 12px 18px; font-size: 0.9rem; color: var(--muted); border-top: 1px solid var(--line); }
   .vm-foot:empty { display: none; }
   .vm-foot a { color: var(--fg); text-underline-offset: 3px; }
+
+  /* Project brief: contact card with info panel + form */
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .brief { display: grid; grid-template-columns: 1fr; border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line)); border-radius: 28px; overflow: hidden; background: var(--bg); }
+  .brief-info { padding: 32px 24px; background: var(--surface); }
+  .brief-form { padding: 32px 24px; display: grid; gap: 14px; align-content: start; }
+  .brief-kicker { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; font: 500 0.78rem var(--font-mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .brief-info h2 { margin: 0 0 12px; }
+  .brief-facts { margin: 26px 0 8px; display: grid; gap: 16px; }
+  .brief-facts dt { font: 400 0.78rem var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .brief-facts dd { margin: 4px 0 0; font: 600 1.05rem var(--font-body); color: var(--fg); }
+  .brief-info .rows { margin-top: 22px; }
+  .bf-two { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .bf-field { display: block; }
+  .bf-field input, .bf-field textarea { width: 100%; padding: 0 22px; height: 58px; font: 400 1rem var(--font-body); color: var(--fg); background: var(--surface); border: 1px solid var(--line-strong); border-radius: 18px; }
+  .bf-field textarea { height: auto; min-height: 170px; padding: 18px 22px; resize: vertical; }
+  .bf-field input::placeholder, .bf-field textarea::placeholder { color: var(--muted); opacity: 0.9; }
+  .bf-field input:focus, .bf-field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+  .bf-send { justify-self: start; display: inline-flex; align-items: center; gap: 12px; height: 56px; padding: 0 30px; border: 0; border-radius: 16px; font: 700 1rem var(--font-body); color: var(--on-accent); background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #7a4a10)); cursor: pointer; }
+  .bf-send:hover { filter: brightness(1.07); }
+  .bf-msg { margin: 0; min-height: 1.3em; font-size: 0.92rem; color: var(--muted); }
+  .bf-msg.err { color: #FF8A8A; }
+  .bf-msg.ok { color: var(--ok); }
+  @media (min-width: 900px) {
+    .brief { grid-template-columns: 5fr 7fr; }
+    .brief-info { padding: 56px 48px; }
+    .brief-form { padding: 56px 48px; }
+    .bf-two { grid-template-columns: 1fr 1fr; }
+  }
+  :root[data-theme="light"] .brief-form { background: #fff; }
