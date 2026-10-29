@@ -30,8 +30,8 @@
 <main id="top">
   <section class="hero hero-v">
     <img class="hv-bgimg" id="hv-bgimg" src="assets/thumbs/17-bg.jpg" alt="" aria-hidden="true">
-    <video class="hv-video on" id="hv-video" autoplay muted loop playsinline preload="auto" poster="assets/thumbs/05-hero.jpg" aria-hidden="true" tabindex="-1">
-      <source src="assets/clips/hero-long-form.mp4" type="video/mp4">
+    <video class="hv-video on" id="hv-video" autoplay muted loop playsinline preload="auto" poster="assets/thumbs/hero-intro.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/clips/hero-intro.mp4" type="video/mp4">
     </video>
     <div class="hv-shade" aria-hidden="true"></div>
     <button class="hv-toggle" id="hv-toggle" type="button" aria-label="Pause background video"><svg id="hv-pause-ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><svg id="hv-play-ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" hidden><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
@@ -586,6 +586,7 @@
     var a = document.getElementById('hv-video'), btn = document.getElementById('hv-toggle');
     if (!a || !btn) return;
     var slides = [
+      { src: 'assets/clips/hero-intro.mp4', pos: '50% 50%', portrait: false, bg: '' },
       { src: 'assets/clips/hero-long-form.mp4', pos: '50% 50%', portrait: false, bg: '' },
       { src: 'assets/clips/lexus-lc-showcase.mp4', pos: '50% 72%', portrait: false, bg: '' },
       { src: 'assets/clips/hero-talking-head.mp4', pos: '', portrait: true, bg: 'assets/thumbs/17-bg.jpg' },
