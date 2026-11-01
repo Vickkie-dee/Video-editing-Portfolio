@@ -439,3 +439,9 @@
   .rv-slide figcaption { padding-top: 12px; }
   .stars svg { width: 16px; height: 16px; }
   .rv-controls { padding: 10px clamp(14px, 3vw, 20px); }
+
+  /* Hero: name in a script face */
+  .hero-kicker { display: flex; align-items: center; gap: 14px; margin: 22px 0 0; font: 500 0.8rem var(--font-mono); letter-spacing: 0.26em; text-transform: uppercase; color: var(--accent); }
+  .hero-kicker::before { content: ""; width: 44px; height: 1px; background: var(--accent); }
+  .hero-v h1.name { font-family: 'Great Vibes', 'Snell Roundhand', 'Brush Script MT', cursive; font-weight: 400; font-size: clamp(3.6rem, 12.5vw, 9.5rem); line-height: 1.02; letter-spacing: 0; margin: 6px 0 14px; padding-bottom: 0.08em; max-width: none; text-wrap: nowrap; color: #FFD27A; background: linear-gradient(180deg, #FFE3A3 10%, #F2B84B 60%, #D99A2B 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; filter: drop-shadow(0 4px 24px rgba(0,0,0,0.45)); }
+  .hero-v .lede { max-width: 46ch; }
