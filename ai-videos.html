@@ -127,29 +127,32 @@
 
   <section class="block" id="contact">
     <div class="wrap">
-      <div class="brief">
-        <div class="brief-info">
-          <p class="brief-kicker"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 9h16v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9zM4 9l2.5-4.5 3 1.2L12 3l2.5 2.7 3-1.2L20 9M8 9l2-3.8M13 9l2-3.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Project brief</p>
-          <h2>Don’t see what you need?</h2>
-          <p class="lead">Tell me about your project: what it is, who it’s for, and when you need it. I’ll take it from there.</p>
-          <dl class="brief-facts">
-            <div><dt>Based in</dt><dd>Lagos, Nigeria (remote worldwide)</dd></div>
-            <div><dt>Response time</dt><dd>Within 1 business day</dd></div>
-          </dl>
+      <div class="bk-head">
+        <h2>Let’s make your video</h2>
+        <p class="lead">Tell me what you’re making and I’ll reply with the right approach, a timeline and the next step.</p>
+      </div>
+      <div class="bk-grid">
+        <div class="bk-card">
+          <h3>Get in touch</h3>
+          <p class="bk-line"><span>Email</span> <a href="mailto:idiakevictory909@gmail.com">idiakevictory909@gmail.com</a></p>
+          <p class="bk-line"><span>LinkedIn</span> <a href="https://www.linkedin.com/in/victory-idiake-581758333" target="_blank" rel="noopener">Victory Idiake ↗</a></p>
+          <p class="bk-line"><span>Based in</span> Lagos, Nigeria (remote worldwide)</p>
         </div>
-        <form class="brief-form" id="brief-form" novalidate>
-          <div class="bf-two">
-            <label class="bf-field"><span class="sr">Your name</span><input type="text" name="name" placeholder="Your Name *" autocomplete="name" required></label>
-            <label class="bf-field"><span class="sr">Your email</span><input type="email" name="email" placeholder="Your Email *" autocomplete="email" required></label>
-          </div>
-          <label class="bf-field"><span class="sr">Project or subject</span><input type="text" name="subject" placeholder="Project / Subject"></label>
-          <label class="bf-field"><span class="sr">About the project</span><textarea name="concept" rows="6" placeholder="Tell me about the project *" required></textarea></label>
+        <form class="bk-card bk-form" id="brief-form" novalidate>
+          <label class="bf-field"><span class="sr">Your name</span><input type="text" name="name" placeholder="Your name" autocomplete="name" required></label>
+          <label class="bf-field"><span class="sr">Email address</span><input type="email" name="email" placeholder="Email address" autocomplete="email" required></label>
+          <label class="bf-field"><span class="sr">Project details</span><textarea name="concept" rows="4" placeholder="Project details" required></textarea></label>
           <p class="bf-msg" id="bf-msg" role="status" aria-live="polite"></p>
-          <button class="bf-send" type="submit"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M21 3 3 10.5l7 3 3 7L21 3zM10 13.5 21 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg>Send the Brief</button>
+          <button class="bk-send" type="submit">Send inquiry</button>
         </form>
+        <div class="bk-card">
+          <h3>Availability</h3>
+          <p>Booking projects this quarter for brands, creators, events and launches. I usually reply within one business day.</p>
+        </div>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer>
@@ -176,7 +179,7 @@
   var msg=document.getElementById('bf-msg');
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var n=f.name.value.trim(), m=f.email.value.trim(), s=f.subject.value.trim(), c=f.concept.value.trim();
+    var n=f.name.value.trim(), m=f.email.value.trim(), s=(f.subject?f.subject.value.trim():''), c=f.concept.value.trim();
     if(!n||!m||!c||!/^\S+@\S+\.\S+$/.test(m)){ msg.textContent='Please add your name, a valid email and a few words about the project.'; msg.className='bf-msg err'; return; }
     var body='Name: '+n+'\nEmail: '+m+'\n\n'+c;
     location.href='mailto:idiakevictory909@gmail.com?subject='+encodeURIComponent(s||'Video project')+'&body='+encodeURIComponent(body);

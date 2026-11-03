@@ -268,24 +268,29 @@
   </section>
 
   <section class="block" id="contact">
-    <div class="wrap contact-grid">
-      <div>
-        <p class="eyebrow">Get in touch</p>
-        <h2>Let’s make something together.</h2>
-        <p class="lead">Got footage sitting on a drive, or an idea you can’t quite shape yet? Send me a message and tell me about it. Even a rough brief is enough to start.</p>
+    <div class="wrap">
+      <div class="bk-head">
+        <h2>Let’s make your video</h2>
+        <p class="lead">Tell me what you’re making and I’ll reply with the right approach, a timeline and the next step.</p>
       </div>
-      <div class="rows">
-        <div class="row">
-          <div><div class="label">Email</div><div class="value" id="v-email">idiakevictory909@gmail.com</div></div>
-          <button class="copy" type="button" data-target="v-email">Copy</button>
+      <div class="bk-grid">
+        <div class="bk-card">
+          <h3>Get in touch</h3>
+          <p class="bk-line"><span>Email</span> <a href="mailto:idiakevictory909@gmail.com">idiakevictory909@gmail.com</a></p>
+            <p class="bk-line"><span>Phone</span> <a href="tel:+2349166200995">09166200995</a></p>
+          <p class="bk-line"><span>LinkedIn</span> <a href="https://www.linkedin.com/in/victory-idiake-581758333" target="_blank" rel="noopener">Victory Idiake ↗</a></p>
+          <p class="bk-line"><span>Based in</span> Lagos, Nigeria (remote worldwide)</p>
         </div>
-        <div class="row">
-          <div><div class="label">Phone</div><div class="value" id="v-phone">09166200995</div></div>
-          <button class="copy" type="button" data-target="v-phone">Copy</button>
-        </div>
-        <div class="row">
-          <div><div class="label">LinkedIn</div><div class="value">Victory Idiake</div></div>
-          <a class="out" href="https://www.linkedin.com/in/victory-idiake-581758333" target="_blank" rel="noopener">Open ↗</a>
+        <form class="bk-card bk-form" id="brief-form" novalidate>
+          <label class="bf-field"><span class="sr">Your name</span><input type="text" name="name" placeholder="Your name" autocomplete="name" required></label>
+          <label class="bf-field"><span class="sr">Email address</span><input type="email" name="email" placeholder="Email address" autocomplete="email" required></label>
+          <label class="bf-field"><span class="sr">Project details</span><textarea name="concept" rows="4" placeholder="Project details" required></textarea></label>
+          <p class="bf-msg" id="bf-msg" role="status" aria-live="polite"></p>
+          <button class="bk-send" type="submit">Send inquiry</button>
+        </form>
+        <div class="bk-card">
+          <h3>Availability</h3>
+          <p>Booking projects this quarter for brands, creators, events and launches. I usually reply within one business day.</p>
         </div>
       </div>
     </div>
@@ -298,6 +303,21 @@
     <a href="#top">Back to top</a>
   </div>
 </footer>
+
+<script>
+(function(){
+  var f=document.getElementById('brief-form'); if(!f) return;
+  var msg=document.getElementById('bf-msg');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var n=f.name.value.trim(), m=f.email.value.trim(), s=(f.subject?f.subject.value.trim():''), c=f.concept.value.trim();
+    if(!n||!m||!c||!/^\S+@\S+\.\S+$/.test(m)){ msg.textContent='Please add your name, a valid email and a few words about the project.'; msg.className='bf-msg err'; return; }
+    var body='Name: '+n+'\nEmail: '+m+'\n\n'+c;
+    location.href='mailto:idiakevictory909@gmail.com?subject='+encodeURIComponent(s||'Video project')+'&body='+encodeURIComponent(body);
+    msg.textContent='Your email app should open with the brief ready to send. If it does not, write to idiakevictory909@gmail.com.'; msg.className='bf-msg ok';
+  });
+})();
+</script>
 
 <script>
 (function () {

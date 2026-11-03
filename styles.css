@@ -445,3 +445,20 @@
   .hero-kicker::before { content: ""; width: 44px; height: 1px; background: var(--accent); }
   .hero-v h1.name { font-family: 'Great Vibes', 'Snell Roundhand', 'Brush Script MT', cursive; font-weight: 400; font-size: clamp(3.6rem, 12.5vw, 9.5rem); line-height: 1.02; letter-spacing: 0; margin: 6px 0 14px; padding-bottom: 0.08em; max-width: none; text-wrap: nowrap; color: #FFD27A; background: linear-gradient(180deg, #FFE3A3 10%, #F2B84B 60%, #D99A2B 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; filter: drop-shadow(0 4px 24px rgba(0,0,0,0.45)); }
   .hero-v .lede { max-width: 46ch; }
+
+  /* Book section: three cards (details, form, availability) */
+  .bk-head { margin-bottom: 28px; }
+  .bk-head h2 { margin: 0 0 10px; }
+  .bk-head .lead { max-width: 60ch; }
+  .bk-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .bk-card { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .bk-card h3 { margin: 0 0 6px; font-family: var(--font-display); font-size: 1.35rem; }
+  .bk-card p { margin: 0; color: var(--muted); line-height: 1.55; }
+  .bk-line { display: flex; flex-direction: column; gap: 2px; }
+  .bk-line span { font: 400 0.75rem var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .bk-line a { color: var(--accent); overflow-wrap: anywhere; }
+  .bk-card .bf-field input, .bk-card .bf-field textarea { background: var(--bg); border-radius: 18px; }
+  .bk-card .bf-field textarea { min-height: 130px; }
+  .bk-send { height: 56px; border: 0; border-radius: 999px; font: 700 1rem var(--font-body); color: var(--on-accent); background: linear-gradient(135deg, #E9B83E, #A8752A); box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 22%, transparent); cursor: pointer; }
+  .bk-send:hover { filter: brightness(1.07); }
+  @media (min-width: 900px) { .bk-grid { grid-template-columns: 1fr 1.1fr 1fr; align-items: stretch; } .bk-card { padding: 30px; } }
