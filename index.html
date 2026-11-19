@@ -30,8 +30,8 @@
 <main id="top">
   <section class="hero hero-v">
     <img class="hv-bgimg" id="hv-bgimg" src="assets/thumbs/17-bg.jpg" alt="" aria-hidden="true">
-    <video class="hv-video on" id="hv-video" autoplay muted loop playsinline preload="auto" poster="assets/thumbs/05-hero.jpg" aria-hidden="true" tabindex="-1">
-      <source src="assets/clips/hero-long-form.mp4" type="video/mp4">
+    <video class="hv-video on" id="hv-video" autoplay muted loop playsinline preload="auto" poster="assets/thumbs/hero-duo.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/clips/hero-real-estate-duo.mp4" type="video/mp4">
     </video>
     <div class="hv-shade" aria-hidden="true"></div>
     <button class="hv-toggle" id="hv-toggle" type="button" aria-label="Pause background video"><svg id="hv-pause-ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M8 5v14M16 5v14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><svg id="hv-play-ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" hidden><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
@@ -121,9 +121,9 @@
           </span>
         </a>
         <a class="pick" href="video-editing.html" style="--c: var(--c-video)">
-          <span class="pick-thumbs" aria-hidden="true"><img src="assets/thumbs/25.jpg" alt="" loading="lazy"><img src="assets/thumbs/24.jpg" alt="" loading="lazy"><img src="assets/thumbs/23.jpg" alt="" loading="lazy"></span>
+          <span class="pick-thumbs" aria-hidden="true"><img src="assets/thumbs/27.jpg" alt="" loading="lazy"><img src="assets/thumbs/26.jpg" alt="" loading="lazy"><img src="assets/thumbs/25.jpg" alt="" loading="lazy"></span>
           <span class="pick-body">
-            <span class="pick-kicker">Edited · 17 videos</span>
+            <span class="pick-kicker">Edited · 19 videos</span>
             <span class="pick-title">Video Editing</span>
             <span class="pick-cta">Click to see more video editing <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </span>
@@ -346,6 +346,26 @@
      An item without a clip shows its thumbnail for a few seconds, so the section works before clips are added. */
   (function () {
     var items = [
+  {
+    "id": "27",
+    "title": "Luxury Villa Showcase",
+    "kind": "Video editing",
+    "thumb": "assets/thumbs/27.jpg",
+    "link": "assets/clips/luxury-villa-showcase.mp4",
+    "clip": "assets/clips/luxury-villa-showcase.mp4",
+    "ar": "9 / 16",
+    "page": "video-editing.html"
+  },
+  {
+    "id": "26",
+    "title": "Real Estate Walkthrough with Speed Ramps",
+    "kind": "Video editing",
+    "thumb": "assets/thumbs/26.jpg",
+    "link": "assets/clips/real-estate-walkthrough.mp4",
+    "clip": "assets/clips/real-estate-walkthrough.mp4",
+    "ar": "9 / 16",
+    "page": "video-editing.html"
+  },
   {
     "id": "25",
     "title": "YouTube Podcast Trailer",
@@ -667,6 +687,7 @@
     var a = document.getElementById('hv-video'), btn = document.getElementById('hv-toggle');
     if (!a || !btn) return;
     var slides = [
+      { src: 'assets/clips/hero-real-estate-duo.mp4', srcM: 'assets/clips/hero-real-estate-duo-m.mp4', posterM: 'assets/thumbs/hero-duo-m.jpg', pos: '50% 50%', portrait: false, bg: '' },
       { src: 'assets/clips/hero-long-form.mp4', pos: '50% 50%', portrait: false, bg: '' },
       { src: 'assets/clips/lexus-lc-showcase.mp4', pos: '50% 72%', portrait: false, bg: '' },
       { src: 'assets/clips/hero-podcast-trailer.mp4', pos: '50% 40%', portrait: false, bg: '' },
@@ -688,11 +709,14 @@
       document.getElementById('hv-play-ic').hidden = !paused;
       btn.setAttribute('aria-label', paused ? 'Play background video' : 'Pause background video');
     }
+    var narrow = window.matchMedia('(max-width: 700px), (max-aspect-ratio: 1/1)').matches;
+    function srcOf(s) { return (narrow && s.srcM) ? s.srcM : s.src; }
+    if (narrow && slides[0].srcM) { a.setAttribute('poster', slides[0].posterM); a.innerHTML = ''; a.src = slides[0].srcM; a.load(); }
     function prep() {
       var nxt = els[1 - cur], ns = (si + 1) % slides.length;
       nxt.style.objectPosition = slides[ns].pos;
       nxt.classList.toggle('portrait', slides[ns].portrait);
-      if (nxt.getAttribute('data-s') !== String(ns)) { nxt.src = slides[ns].src; nxt.setAttribute('data-s', String(ns)); nxt.load(); }
+      if (nxt.getAttribute('data-s') !== String(ns)) { nxt.src = srcOf(slides[ns]); nxt.setAttribute('data-s', String(ns)); nxt.load(); }
     }
     function playEl(v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
     function swap() {
